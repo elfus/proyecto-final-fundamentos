@@ -134,6 +134,9 @@ class TestRegexToNfa(unittest.TestCase):
         self.assertEqual(tup, compare("hello+world", "world+hello"))
         self.assertEqual(tup, compare("#a*(b(a+b)*)#", "a*b(a+b)*"))
 
+        # empty set
+        self.assertEqual(tup, compare("%*", "#"))
+
 
     def test_invalid_tests(self):
         f = lambda reg: build_dfa(infix_to_prefix(reg))

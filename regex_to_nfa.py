@@ -44,6 +44,11 @@ class NFA(object):
         self._states.add(self._start)
         self._alphabet.add('#')
 
+    def init_empty_set(self):
+        """NFA that accepts the empty set '%'"""
+        self._start = NFA.create_new_state()
+        self._states.add(self._start)
+
     def add_transition(self, state, symbol, next_states):
         """
         symbol may be a number
@@ -471,6 +476,10 @@ def build_dfa(regex):
         elif symbol == '#':
             symbol_nfa = NFA()
             symbol_nfa.init_empty_string()
+            stack.append(symbol_nfa)
+        elif symbol == '%':
+            symbol_nfa = NFA()
+            symbol_nfa.init_empty_set()
             stack.append(symbol_nfa)
         else:
             print "ERROR: Simbolo desconocido {0}\n".format(symbol)
